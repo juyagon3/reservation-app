@@ -1,0 +1,33 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductListComponent } from './product-listings/product-listings.component';
+import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ProductComponent } from './product.component';
+
+const routes: Routes = [
+    {
+        path: 'products', component: ProductComponent,
+        children: [
+            { path: '', component: ProductListComponent },
+            { path: ':productId', component: ProductDetailComponent }
+        ]
+    }
+];
+
+
+@NgModule({
+    declarations: [
+        ProductComponent,
+        ProductDetailComponent,
+        ProductListComponent
+    ],
+    imports: [
+        RouterModule.forChild(routes),
+        CommonModule
+    ],
+    providers: [],
+    bootstrap: [],
+    // schemas: [CUSTOM_ELEMENTS_SCHEMA] // これを追加しないと、新しく追加したコンポーネントがコンパイルエラーになる
+})
+export class ProductModule { }
